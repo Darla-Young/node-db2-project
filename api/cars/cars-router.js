@@ -24,3 +24,5 @@ router.post('/', checkCarPayload, checkVinNumberValid, checkVinNumberUnique, (re
     .then(car => res.json(car))
     .catch(err => res.status(500).json(err))
 })
+
+module.exports = router

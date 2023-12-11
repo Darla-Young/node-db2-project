@@ -10,10 +10,11 @@ const checkCarId = async (req, res, next) => {
 
 const checkCarPayload = (req, res, next) => {
   const { vin, make, model, mileage } = req.body
-  const fieldArr = [vin, make, model, mileage]
-  let missing = []
-  for (let x of fieldArr) if (!x) missing.push(x)
-  if (missing.length > 0) res.status(400).json({message: `${missing[0]} is missing`})
+  const fieldArr = ['vin', 'make', 'model', 'mileage']
+  const reqArr = [vin, make, model, mileage]
+  let i = null
+  for (let x in reqArr) if (!reqArr[x]) i = x
+  if (i) res.status(400).json({message: `${fieldArr[i]} is missing`})
   else next()
 }
 
